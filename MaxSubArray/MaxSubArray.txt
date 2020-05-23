@@ -1,0 +1,30 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int T;
+    cin>>T;
+    
+    while(T-->0) {
+        int N;
+        cin>>N;
+        long pos_sum=0,min_sum=0,curr_sum=0,tmp,ans=(1<<31),max_val=(1<<31);
+        for(int i=0;i<N;i++) {
+            cin>>tmp;
+            if(tmp>0) pos_sum+=tmp;
+            max_val=max(max_val,tmp);
+            curr_sum+=tmp;
+            ans=max(ans,curr_sum-min_sum);
+            min_sum=min(min_sum,curr_sum);
+        }
+        if(pos_sum<=0) pos_sum=max_val;
+        cout << ans << " " << pos_sum << endl;
+    }
+    
+}
