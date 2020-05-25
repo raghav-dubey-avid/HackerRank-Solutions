@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<int> a[105];
+bool visit[105];
+int n,m;
+int ans;
+
+int dfs(int node){
+
+    visit[node] = true;
+    int num_v = 0;
+    for(int i = 0; i < a[node].size(); i++){
+        if(!visit[a[node][i]]){
+            int num_nodes = dfs(a[node][i]);
+            if(num_nodes %2==0)
+                ans++;
+            else
+                num_v += num_nodes;
+        }
+    }
+    return num_v + 1;
+}
+
+int main(){
+    int x,y;
+    cin>>n>>m;
+    for(int i = 0; i < m; i++){
+        cin>>x>>y;
+        a[x].push_back(y);
+        a[y].push_back(x);
+    }
+    dfs(1);
+    cout<<ans;
+    return 0;
+}
